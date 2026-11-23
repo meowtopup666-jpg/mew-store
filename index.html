@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MEW STORE - បញ្ចូលហ្គេមកម្ពុជា</title>
+    <style>
+        :root {
+            --bg-body: #FFF5F5;
+            --bg-card: #FFFFFF;
+            --bg-soft: #FED7D7;
+            --text-main: #1C1C1E;
+            --text-sub: #6B7280;
+            --border-color: #FFD1D1;
+            --primary: #C53030;
+            --primary-dark: #9B2C2C;
+            --accent-gold: #F59E0B;
+        }
+
+        body.dark-mode {
+            --bg-body: #111827;
+            --bg-card: #1F2937;
+            --bg-soft: #374151;
+            --text-main: #F9FAFB;
+            --text-sub: #9CA3AF;
+            --border-color: #374151;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(197, 48, 48, 0.2);
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding-bottom: 110px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--bg-card);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: var(--primary);
+            color: #fff;
+            font-weight: 900;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-text h1 {
+            font-size: 16px;
+            color: var(--primary);
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .logo-text p {
+            font-size: 10px;
+            color: var(--text-sub);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-circle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-body);
+            border: 1.5px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        /* HERO BANNER */
+        .hero-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: 20px;
+            padding: 18px 16px;
+            color: #fff;
+            margin-bottom: 14px;
+            box-shadow: 0 6px 18px rgba(197, 48, 48, 0.25);
+        }
+
+        .hero-status-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .status-pill {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .hero-title {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .hero-sub {
+            font-size: 11px;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+
+        .announcement-strip {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 11px;
+            color: #92400E;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .section-title-box {
+            margin-bottom: 12px;
+        }
+
+        .section-header-title {
+            font-size: 15px;
+            font-weight: 900;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+        }
+
+        .section-sub-title {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        /* 3-COLUMN FAMOUS GAMES GRID (USING NATIVE BUTTONS FOR 100% MOBILE TAP) */
+        .games-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .game-card-btn {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 10px 8px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .game-card-btn:active {
+            transform: scale(0.96);
+            border-color: var(--primary);
+        }
+
+        .hot-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #FACC15;
+            color: #713F12;
+            font-size: 8px;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 8px;
+            z-index: 2;
+        }
+
+        .off-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #EF4444;
+            color: #fff;
+            font-size: 8px;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 8px;
+            z-index: 2;
+        }
+
+        .game-thumb {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-weight: 900;
+            font-size: 12px;
+        }
+
+        .roblox-sq {
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            border-radius: 6px;
+            transform: rotate(-12deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .roblox-sq::after {
+            content: '';
+            width: 9px;
+            height: 9px;
+            background: #1E3A8A;
+            border-radius: 2px;
+        }
+
+        .game-name-3 {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .btn-topup-pill {
+            background: #FACC15;
+            color: #111827;
+            border-radius: 20px;
+            padding: 5px 0;
+            width: 100%;
+            font-size: 9px;
+            font-weight: 900;
+            display: block;
+        }
+
+        .btn-maint-pill {
+            background: #E5E7EB;
+            color: #6B7280;
+            border-radius: 20px;
+            padding: 5px 0;
+            width: 100%;
+            font-size: 8px;
+            font-weight: 800;
+            display: block;
+        }
+
+        /* PACKAGE CARDS */
+        .items-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .pkg-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px 10px 10px 10px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            text-align: left;
+        }
+
+        .pkg-card.selected {
+            border-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        body.dark-mode .pkg-card.selected {
+            background: var(--bg-soft);
+        }
+
+        .discount-pill {
+            position: absolute;
+            top: -9px;
+            left: 10px;
+            background: linear-gradient(90deg, #F59E0B, #EA580C);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .pkg-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            margin-top: 4px;
+        }
+
+        .robux-hex-svg {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+        }
+
+        .pkg-price {
+            font-size: 15px;
+            font-weight: 900;
+            color: #D97706;
+        }
+
+        .pkg-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .pkg-add-btn {
+            width: 100%;
+            border: 1.5px solid #F59E0B;
+            background: transparent;
+            color: #D97706;
+            border-radius: 10px;
+            padding: 6px;
+            font-size: 12px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .pkg-qty-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1.5px solid #F59E0B;
+            border-radius: 10px;
+            padding: 3px 6px;
+            background: var(--bg-card);
+        }
+
+        .pkg-qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            border: none;
+            background: #FEF3C7;
+            color: #D97706;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pkg-qty-count {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        .back-menu-btn {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            color: var(--primary);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 13px;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 14px;
+            border: 1.5px solid var(--border-color);
+            margin-bottom: 14px;
+        }
+
+        .input-field {
+            width: 100%;
+            background: var(--bg-body);
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            padding: 11px;
+            font-size: 14px;
+            color: var(--text-main);
+            outline: none;
+            margin-top: 6px;
+        }
+
+        .login-extra-box {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .login-extra-box.active {
+            display: block;
+        }
+
+        .pay-section {
+            background: var(--primary);
+            color: #fff;
+            border-radius: 16px;
+            padding: 14px;
+            margin-top: 14px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #111827;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 14px;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        /* HISTORY CARD */
+        .history-item {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px;
