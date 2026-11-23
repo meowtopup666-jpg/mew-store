@@ -1,0 +1,13 @@
+{
+  "name": "mew-store-live-chat",
+  "version": "1.0.0",
+  "description": "Live chat backend for MEW STORE connected to Telegram",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
